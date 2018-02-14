@@ -10,10 +10,7 @@ import java.util.Scanner;
  */
 public class Venmo {
     public static void main(String[] args) {
-        System.out.println("Hello Venmo");
-        for (String arguments : args) {
-            System.out.println(arguments);
-        }
+
 
         User user = new User(args[1], Double.valueOf(args[3]));
 
