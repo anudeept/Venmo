@@ -1,10 +1,6 @@
 import Payments.Payment;
-import Payments.Transaction;
-import Payments.UserTransactions;
+import Transactions.UserTransactions;
 import Wallet.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author : anudeep on 2/14/18

@@ -1,6 +1,6 @@
 package Payments;
 
-import Payments.Payment;
+import Transactions.Transaction;
 import Wallet.Wallet;
 
 /**
@@ -19,7 +19,7 @@ public class Payment_Request implements Payment {
 
     @Override
     public Transaction doTransaction() {
-        wallet.addAmount(transaction.amount);
+        wallet.addAmount(transaction.getAmount());
         return transaction;
     }
 }

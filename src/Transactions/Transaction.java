@@ -1,4 +1,4 @@
-package Payments;
+package Transactions;
 
 /**
  * @author : anudeep on 2/14/18
@@ -40,7 +40,7 @@ public class Transaction {
                 '}';
     }
 
-    enum Type{
+    public enum Type{
         REQUEST,FULFILL
     }
 }

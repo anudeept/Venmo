@@ -18,7 +18,8 @@ public class Venmo {
         User user = new User(args[1], Double.valueOf(args[3]));
 
         while (true) {
-            System.out.println("1.GetBalance\n2.Request UserB 30");
+            System.out.println("**** Menu ****");
+            System.out.println("1.GetBalance\n2.Request Money\n3.Print_Transactions\n4.Print_Total_Owe_Amount\n5.Print_Total_Owe_Amount_to_Others");
             Scanner sc = new Scanner(System.in);
             String command = sc.nextLine();
 
@@ -32,7 +33,7 @@ public class Venmo {
                     System.out.println("Balance=" + user.wallet.getBalance());
                     break;
                 case "Request Money":
-                    System.out.println(" Enter user Name and amount (UserB 30)");
+                    System.out.println("\t Enter user Name and amount (UserB 30)");
                     sc1 = new Scanner(System.in);
                     command1 = sc.nextLine();
                     System.out.println(command1);
@@ -47,6 +48,15 @@ public class Venmo {
                     req_arr = command1.split(" ");
                     payment = new Payment_Fulfill(user.wallet, req_arr[0], Double.valueOf(req_arr[1]));
                     user.paymentGateway(payment);
+                    break;
+                case "Print_Transactions":
+                    user.recentTransactions.printTransactions();
+                    break;
+                case "Print_Total_Owe_Amount":
+                    System.out.println(user.recentTransactions.getTotalOweAmount());
+                    break;
+                case "Print_Total_Owe_Amount_to_Others":
+                    System.out.println(user.recentTransactions.getTotalOweAmountByThem());
                     break;
             }
         }

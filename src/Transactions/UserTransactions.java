@@ -1,4 +1,4 @@
-package Payments;
+package Transactions;
 
 import java.util.ArrayList;
 

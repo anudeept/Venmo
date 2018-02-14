@@ -1,5 +1,6 @@
 package Payments;
 
+import Transactions.Transaction;
 import Wallet.Wallet;
 
 /**
@@ -17,7 +18,7 @@ public class Payment_Fulfill implements Payment {
 
     @Override
     public Transaction doTransaction() {
-        wallet.dedutAmount(transaction.amount);
+        wallet.dedutAmount(transaction.getAmount());
         return transaction;
     }
 }
