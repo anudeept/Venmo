@@ -12,7 +12,13 @@ public class Venmo {
     public static void main(String[] args) {
 
         Venmo venmo = new Venmo();
-        User user = new User(args[1], Double.valueOf(args[3]));
+        User user=null;
+        if (args.length == 4) {
+            user = new User(args[1], Double.valueOf(args[3]));
+        } else {
+            System.out.println("Please Run Program with following Parameters \n  Venmo.jar --user UserA --init-balance 30");
+            System.exit(0);
+        }
 
         while (true) {
             System.out.println("**** Menu ****");
@@ -29,9 +35,9 @@ public class Venmo {
                 case "Request_Money":
                     req_arr = venmo.getUserData(sc);
                     payment = new Payment_Request(user.wallet, req_arr[0], Double.valueOf(req_arr[1]));
-                    if (user.paymentGateway(payment)){
+                    if (user.paymentGateway(payment)) {
                         System.out.println("** Transaction Completed ** ");
-                    }else {
+                    } else {
                         System.out.println("** Transaction Failed ** ");
 
                     }
@@ -39,12 +45,13 @@ public class Venmo {
                 case "Make_Payment":
                     req_arr = venmo.getUserData(sc);
                     payment = new Payment_Fulfill(user.wallet, req_arr[0], Double.valueOf(req_arr[1]));
-                    if (user.paymentGateway(payment)){
+                    if (user.paymentGateway(payment)) {
                         System.out.println("** Transaction Completed ** ");
-                    }else {
+                    } else {
                         System.out.println("** Transaction Failed ** ");
 
-                    }                    break;
+                    }
+                    break;
                 case "Print_Transactions":
                     user.recentTransactions.printTransactions();
                     break;
