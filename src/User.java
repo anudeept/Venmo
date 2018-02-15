@@ -31,7 +31,12 @@ public class User {
     }
 
     public boolean paymentGateway(Payment payment) {
-       return recentTransactions.add(payment.doTransaction());
+        try {
+            recentTransactions.add(payment.doTransaction());
+        } catch (Exception ex) {
+            return false;
+        }
+        return true;
     }
 
 }

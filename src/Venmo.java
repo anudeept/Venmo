@@ -11,41 +11,40 @@ import java.util.Scanner;
 public class Venmo {
     public static void main(String[] args) {
 
-
+        Venmo venmo = new Venmo();
         User user = new User(args[1], Double.valueOf(args[3]));
 
         while (true) {
             System.out.println("**** Menu ****");
-            System.out.println("1.GetBalance\n2.Request Money\n3.Print_Transactions\n4.Print_Total_Owe_Amount\n5.Print_Total_Owe_Amount_to_Others");
+            System.out.println("1.Get_Balance\n2.Request_Money\n3.Make_Payment\n4.Print_Transactions\n5.Print_Total_Owe_Amount\n6.Print_Total_Owe_Amount_to_Others");
             Scanner sc = new Scanner(System.in);
             String command = sc.nextLine();
 
-
-            Scanner sc1;
-            String command1;
             String[] req_arr;
             Payment payment;
             switch (command) {
-                case "GetBalance":
+                case "Get_Balance":
                     System.out.println("Balance=" + user.wallet.getBalance());
                     break;
-                case "Request Money":
-                    System.out.println("\t Enter user Name and amount (UserB 30)");
-                    sc1 = new Scanner(System.in);
-                    command1 = sc.nextLine();
-                    System.out.println(command1);
-                    req_arr = command1.split(" ");
+                case "Request_Money":
+                    req_arr = venmo.getUserData(sc);
                     payment = new Payment_Request(user.wallet, req_arr[0], Double.valueOf(req_arr[1]));
-                    user.paymentGateway(payment);
+                    if (user.paymentGateway(payment)){
+                        System.out.println("** Transaction Completed ** ");
+                    }else {
+                        System.out.println("** Transaction Failed ** ");
+
+                    }
                     break;
-                case "Make Payment":
-                    System.out.println(" Enter user Name and amount (UserB 30)");
-                    sc1 = new Scanner(System.in);
-                    command1 = sc.next();
-                    req_arr = command1.split(" ");
+                case "Make_Payment":
+                    req_arr = venmo.getUserData(sc);
                     payment = new Payment_Fulfill(user.wallet, req_arr[0], Double.valueOf(req_arr[1]));
-                    user.paymentGateway(payment);
-                    break;
+                    if (user.paymentGateway(payment)){
+                        System.out.println("** Transaction Completed ** ");
+                    }else {
+                        System.out.println("** Transaction Failed ** ");
+
+                    }                    break;
                 case "Print_Transactions":
                     user.recentTransactions.printTransactions();
                     break;
@@ -57,5 +56,13 @@ public class Venmo {
                     break;
             }
         }
+    }
+
+    public String[] getUserData(Scanner sc) {
+        System.out.println("\t Enter user Name and amount (UserB 30)");
+        // Scanner sc1 = new Scanner(System.in);
+        String command1 = sc.nextLine();
+        String[] req_arr = command1.split(" ");
+        return req_arr;
     }
 }

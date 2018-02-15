@@ -14,6 +14,7 @@ public class Payment_Fulfill implements Payment {
 
     public  Payment_Fulfill(Wallet wallet, String user, double amount) {
         transaction = new Transaction(user, amount, Transaction.Type.FULFILL);
+        this.wallet=wallet;
     }
 
     @Override
